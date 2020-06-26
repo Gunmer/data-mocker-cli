@@ -1,5 +1,5 @@
 import { Command, flags } from '@oclif/command'
-import { FileService } from '../services/file.service';
+import { FileService } from '../core/file.service';
 
 export default class Generate extends Command {
   static description = 'describe the command here'
@@ -8,7 +8,7 @@ export default class Generate extends Command {
     help: flags.help({char: 'h'}),
     schema: flags.string({
       char: 's',
-      description: 'Schema of the data to be generated',
+      description: 'SchemaModel of the data to be generated',
       required: true
     }),
     output: flags.string({
@@ -23,7 +23,7 @@ export default class Generate extends Command {
 
   async run() {
     try {
-      const {args, flags} = this.parse(Generate)
+      const {flags} = this.parse(Generate)
       let schema = this.fileService.readJson(flags.schema);
       this.log(`JSON: ${JSON.stringify(schema)}`)
       this.log(`OK`)
