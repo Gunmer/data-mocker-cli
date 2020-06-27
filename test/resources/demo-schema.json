@@ -3,10 +3,6 @@
     {
       "type": "Name",
       "name": "name"
-    },
-    {
-      "type": "Name",
-      "name": "name2"
     }
   ]
 }

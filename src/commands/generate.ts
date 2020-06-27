@@ -1,16 +1,25 @@
 import { Command, flags } from '@oclif/command'
-import { FileService } from '../core/file.service';
 import { RowGenerator } from '../core/row.generator';
+import { FileService } from '../core/services/file.service';
 import { NameFieldGenerator } from '../name-field/name-field.generator';
 
 export default class Generate extends Command {
-  static description = 'describe the command here'
+  static description = 'Generate a file with mock data in json, csv or sql insert format'
+
+  static args = [
+    {
+      name: 'number',
+      description: 'Number of mock data',
+      required: true,
+      parse: (input: any) => Number(input)
+    }
+  ]
 
   static flags = {
     help: flags.help({char: 'h'}),
     schema: flags.string({
       char: 's',
-      description: 'SchemaModel of the data to be generated',
+      description: 'Schema of the data to be generated',
       required: true
     }),
     output: flags.string({
@@ -26,7 +35,7 @@ export default class Generate extends Command {
 
   async run() {
     try {
-      const {flags} = this.parse(Generate)
+      const {args,flags} = this.parse(Generate)
 
       let schema = this.fileService.readJson(flags.schema);
       this.log(`Read schema...OK`)
@@ -34,16 +43,13 @@ export default class Generate extends Command {
       this.rowGenerator.registerGenerator(new NameFieldGenerator())
       this.log(`Register generators...OK`)
 
-      let rowModel = this.rowGenerator.generate(schema);
-      let object: any = {}
+      let rows = Array.from(Array(args.number).keys())
+        .map(() => this.rowGenerator.generate(schema))
+      this.log(`Generated ${rows.length} data mock`)
 
-      for (let column of rowModel.columns) {
-        object[column.key] = column.value
-      }
+      let outputFile = this.fileService.writeJson(rows);
 
-      this.log(`Row generated: ${JSON.stringify(object)}`)
-
-      this.log(`OK`)
+      this.log(`Output file: ${outputFile}`)
     } catch (e) {
       this.log(e.message)
     }

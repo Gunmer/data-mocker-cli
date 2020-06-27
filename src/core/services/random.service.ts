@@ -1,4 +1,5 @@
 export class RandomService {
+
   randomBetween(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -7,5 +8,9 @@ export class RandomService {
     return this.randomBetween(1, size) - 1;
   }
 
+  randomItem<T>(array: T[]): T {
+    let index = this.randomIndex(array.length);
+    return array[index]
+  }
 
 }
