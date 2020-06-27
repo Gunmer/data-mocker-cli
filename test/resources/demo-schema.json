@@ -2,7 +2,11 @@
   "fields": [
     {
       "type": "Name",
-      "name": "name field"
+      "name": "name"
+    },
+    {
+      "type": "Name",
+      "name": "name2"
     }
   ]
 }
