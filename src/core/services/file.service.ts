@@ -38,8 +38,14 @@ export class FileService {
 
     let resultPath = path.join(process.cwd(), 'result.json');
 
-    fs.writeFileSync(resultPath, JSON.stringify(jsonArray, null, 2))
+    fs.writeJSONSync(resultPath, jsonArray, {encoding: 'utf-8', spaces: 2})
     return resultPath
+  }
+
+  writeErrorLog(error: Error): string {
+    let errorLogPath = path.join(process.cwd(), 'error.json');
+    fs.writeJSONSync(errorLogPath, error, {encoding: 'utf-8', spaces: 2})
+    return errorLogPath
   }
 
 }

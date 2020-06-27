@@ -1,4 +1,6 @@
 import { Command, flags } from '@oclif/command'
+import * as Listr from 'listr';
+import { ListrTaskWrapper } from 'listr';
 import { RowGenerator } from '../core/row.generator';
 import { FileService } from '../core/services/file.service';
 import { NameFieldGenerator } from '../name-field/name-field.generator';
@@ -34,24 +36,61 @@ export default class Generate extends Command {
   private readonly rowGenerator = new RowGenerator()
 
   async run() {
-    try {
-      const {args,flags} = this.parse(Generate)
+    const ctx = this.parse(Generate)
 
-      let schema = this.fileService.readJson(flags.schema);
-      this.log(`Read schema...OK`)
+    let tasks = new Listr();
+    tasks.add(this.registerGeneratorsTask())
+    tasks.add(this.readSchemaTask())
+    tasks.add(this.generateMockDataTask())
+    tasks.add(this.generateFileTask())
 
-      this.rowGenerator.registerGenerator(new NameFieldGenerator())
-      this.log(`Register generators...OK`)
+    await tasks.run(ctx).catch(reason => {
+      let logFile = this.fileService.writeErrorLog(reason);
+      this.log(`Oops an error has occurred, for more details see: ${logFile}`)
+    })
+  }
 
-      let rows = Array.from(Array(args.number).keys())
-        .map(() => this.rowGenerator.generate(schema))
-      this.log(`Generated ${rows.length} data mock`)
-
-      let outputFile = this.fileService.writeJson(rows);
-
-      this.log(`Output file: ${outputFile}`)
-    } catch (e) {
-      this.log(e.message)
+  private registerGeneratorsTask() {
+    return {
+      title: 'Register generators',
+      task: async (ctx: any, task: ListrTaskWrapper) => {
+        let generatorNumber = this.rowGenerator
+          .registerGenerator(new NameFieldGenerator())
+          .generatorNumber();
+        task.output = `Register ${generatorNumber} generators`
+      }
     }
   }
+
+  private readSchemaTask() {
+    return {
+      title: 'Read schema',
+      task: async (ctx: any) => {
+        ctx.schema = this.fileService.readJson(ctx.flags.schema)
+      }
+    }
+
+  }
+
+  private generateMockDataTask() {
+    return {
+      title: 'Generate data mocked',
+      task: async (ctx: any, task: ListrTaskWrapper) => {
+        ctx.rows = Array.from(Array(ctx.args.number).keys())
+          .map(() => this.rowGenerator.generate(ctx.schema))
+        task.title = `Generate ${ctx.rows.length} data mocked`
+      }
+    }
+  }
+
+  private generateFileTask() {
+    return {
+      title: 'Generate File',
+      task: async (ctx: any, task: ListrTaskWrapper) => {
+        ctx.outputFile = this.fileService.writeJson(ctx.rows)
+        task.title = `Generate File: ${ctx.outputFile}`
+      }
+    }
+  }
+
 }

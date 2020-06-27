@@ -18,6 +18,10 @@ export class RowGenerator {
     return this
   }
 
+  generatorNumber(): number {
+    return this.fieldGenerators.size;
+  }
+
   generate(schema: SchemaModel): RowModel {
     let row: RowModel = {columns: []}
 

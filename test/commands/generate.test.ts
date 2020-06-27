@@ -1,18 +1,12 @@
 import { expect, test } from '@oclif/test'
 
 describe('generate', () => {
-  test
-    .stdout()
-    .command(['generate', '10', '-h'])
-    .it('runs generate help', ctx => {
-      expect(ctx.stdout).to.contain('Generate a file with mock data in json, csv or sql insert format')
-    })
 
   test
     .stdout()
     .command(['generate', '10', '--schema', './test/resources/demo-schema.json'])
     .it('runs generate --schema demo-schema.json', ctx => {
-      expect(ctx.stdout).to.contain('Output file')
+      expect(ctx.stdout).to.contain('Generate File')
     })
 
   test
