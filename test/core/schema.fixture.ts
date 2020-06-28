@@ -17,7 +17,7 @@ export class SchemaFixture {
 }
 
 interface FieldFixtureOptions {
-  type: string,
-  name?: string,
-  isNullable?: boolean
+  type: string;
+  name?: string;
+  isNullable?: boolean;
 }
