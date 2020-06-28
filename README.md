@@ -2,7 +2,7 @@ data-mocker-cli
 ===============
 
 
-
+![CI](https://github.com/Gunmer/data-mocker-cli/workflows/CI/badge.svg)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/data-mocker-cli.svg)](https://npmjs.org/package/data-mocker-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/data-mocker-cli.svg)](https://npmjs.org/package/data-mocker-cli)

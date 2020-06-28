@@ -59,10 +59,8 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "pretest": "npm run lint",
     "test": "mocha",
     "lint": "eslint . --ext .ts --config .eslintrc",
-    "precoverage": "npm run lint",
     "coverage": "nyc mocha",
     "version": "oclif-dev readme && git add README.md"
   },
