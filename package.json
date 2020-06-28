@@ -1,6 +1,6 @@
 {
   "name": "data-mocker-cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Cristiam Sosa @Gunmer",
   "bin": {
     "dmcli": "./bin/run"
@@ -59,10 +59,8 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "pretest": "npm run lint",
     "test": "mocha",
     "lint": "eslint . --ext .ts --config .eslintrc",
-    "precoverage": "npm run lint",
     "coverage": "nyc mocha",
     "version": "oclif-dev readme && git add README.md"
   },

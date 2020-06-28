@@ -2,7 +2,7 @@ data-mocker-cli
 ===============
 
 
-
+![CI](https://github.com/Gunmer/data-mocker-cli/workflows/CI/badge.svg)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/data-mocker-cli.svg)](https://npmjs.org/package/data-mocker-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/data-mocker-cli.svg)](https://npmjs.org/package/data-mocker-cli)
@@ -19,7 +19,7 @@ $ npm install -g data-mocker-cli
 $ dmcli COMMAND
 running command...
 $ dmcli (-v|--version|version)
-data-mocker-cli/0.0.0 darwin-x64 node-v12.7.0
+data-mocker-cli/0.1.0 darwin-x64 node-v12.7.0
 $ dmcli --help [COMMAND]
 USAGE
   $ dmcli COMMAND
@@ -28,45 +28,27 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`dmcli generate [FILE]`](#dmcli-generate-file)
-* [`dmcli hello [FILE]`](#dmcli-hello-file)
+* [`dmcli generate NUMBER`](#dmcli-generate-number)
 * [`dmcli help [COMMAND]`](#dmcli-help-command)
 
-## `dmcli generate [FILE]`
+## `dmcli generate NUMBER`
 
-describe the command here
-
-```
-USAGE
-  $ dmcli generate [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-```
-
-_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.0.0/src/commands/generate.ts)_
-
-## `dmcli hello [FILE]`
-
-describe the command here
+Generate a file with mock data in json, csv or sql insert format
 
 ```
 USAGE
-  $ dmcli hello [FILE]
+  $ dmcli generate NUMBER
+
+ARGUMENTS
+  NUMBER  Number of mock data
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ dmcli hello
-  hello world from ./src/hello.ts!
+  -h, --help                 show CLI help
+  -o, --output=sql|json|csv  Output file format
+  -s, --schema=schema        (required) Schema of the data to be generated
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.1.0/src/commands/generate.ts)_
 
 ## `dmcli help [COMMAND]`
 
