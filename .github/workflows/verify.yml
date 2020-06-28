@@ -3,12 +3,9 @@ name: CI
 on:
   push:
     branches:
-    - 'develop'
-    - 'test/*'
-    - 'test/**'
+    - develop
     - test/*
     - test/**
-    - test
 
 jobs:
   build:
