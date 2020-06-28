@@ -3,9 +3,9 @@ import { FieldModel, SchemaModel } from './schema.model';
 import { StringService } from './services/string.service';
 
 export interface FieldGenerator<P extends FieldModel, R> {
-  type: string
+  type: string;
 
-  generate(field: P): ColumnModel<R>
+  generate(field: P): ColumnModel<R>;
 }
 
 export class RowGenerator {
@@ -13,7 +13,7 @@ export class RowGenerator {
   private readonly stringService = new StringService()
 
   registerGenerator(fieldGenerator: FieldGenerator<any, any>): RowGenerator {
-    let key = this.stringService.formatCamelCase(fieldGenerator.type);
+    const key = this.stringService.formatCamelCase(fieldGenerator.type);
     this.fieldGenerators.set(key, fieldGenerator)
     return this
   }
@@ -23,13 +23,13 @@ export class RowGenerator {
   }
 
   generate(schema: SchemaModel): RowModel {
-    let row: RowModel = {columns: []}
+    const row: RowModel = {columns: []}
 
-    for (let field of schema.fields) {
-      let key = this.stringService.formatCamelCase(field.type);
-      let fieldGenerator = this.fieldGenerators.get(key);
+    for (const field of schema.fields) {
+      const key = this.stringService.formatCamelCase(field.type);
+      const fieldGenerator = this.fieldGenerators.get(key);
       if (fieldGenerator) {
-        let column = fieldGenerator.generate(field);
+        const column = fieldGenerator.generate(field);
         row.columns.push(column)
       }
     }

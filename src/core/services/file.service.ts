@@ -10,12 +10,12 @@ export class FileService {
   private readonly validExtensions = ['.json', '.JSON']
 
   readJson(pathFile: string): SchemaModel {
-    let fileNotFound = !fs.existsSync(pathFile);
+    const fileNotFound = !fs.existsSync(pathFile);
     if (fileNotFound) {
       throw new FileNotFoundException()
     }
 
-    let hasValidExtension = !this.validExtensions.some(e => pathFile.endsWith(e));
+    const hasValidExtension = !this.validExtensions.some(e => pathFile.endsWith(e));
     if (hasValidExtension) {
       throw new InvalidFileExtensionException()
     }
@@ -28,22 +28,22 @@ export class FileService {
   }
 
   writeJson(rows: RowModel[]): string {
-    let jsonArray = rows.map(row => {
-      let object: any = {}
-      for (let column of row.columns) {
+    const jsonArray = rows.map(row => {
+      const object: any = {}
+      for (const column of row.columns) {
         object[column.key] = column.value
       }
       return object
     })
 
-    let resultPath = path.join(process.cwd(), 'result.json');
+    const resultPath = path.join(process.cwd(), 'result.json');
 
     fs.writeJSONSync(resultPath, jsonArray, {encoding: 'utf-8', spaces: 2})
     return resultPath
   }
 
   writeErrorLog(error: Error): string {
-    let errorLogPath = path.join(process.cwd(), 'error.json');
+    const errorLogPath = path.join(process.cwd(), 'error.json');
     fs.writeJSONSync(errorLogPath, error, {encoding: 'utf-8', spaces: 2})
     return errorLogPath
   }

@@ -9,7 +9,7 @@ export class RandomService {
   }
 
   randomItem<T>(array: T[]): T {
-    let index = this.randomIndex(array.length);
+    const index = this.randomIndex(array.length);
     return array[index]
   }
 

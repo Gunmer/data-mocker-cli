@@ -7,11 +7,11 @@ import { NameFieldSource } from './name-field.source';
 export class NameFieldGenerator implements FieldGenerator<NameFieldModel, string>{
   private readonly randomService = new RandomService()
 
-  type: string = 'Name'
+  type = 'Name'
 
   generate(field: NameFieldModel): ColumnModel<string> {
-    let names = field.source ?? NameFieldSource.source;
-    let item = this.randomService.randomItem(names);
+    const names = field.source ?? NameFieldSource.source;
+    const item = this.randomService.randomItem(names);
     return {key: field.name, value: item}
   }
 

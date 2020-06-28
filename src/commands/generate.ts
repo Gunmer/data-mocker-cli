@@ -5,6 +5,7 @@ import { RowGenerator } from '../core/row.generator';
 import { FileService } from '../core/services/file.service';
 import { NameFieldGenerator } from '../name-field/name-field.generator';
 
+// noinspection JSUnusedGlobalSymbols
 export default class Generate extends Command {
   static description = 'Generate a file with mock data in json, csv or sql insert format'
 
@@ -38,23 +39,23 @@ export default class Generate extends Command {
   async run() {
     const ctx = this.parse(Generate)
 
-    let tasks = new Listr();
+    const tasks = new Listr();
     tasks.add(this.registerGeneratorsTask())
     tasks.add(this.readSchemaTask())
     tasks.add(this.generateMockDataTask())
     tasks.add(this.generateFileTask())
 
     await tasks.run(ctx).catch(reason => {
-      let logFile = this.fileService.writeErrorLog(reason);
+      const logFile = this.fileService.writeErrorLog(reason);
       this.log(`Oops an error has occurred, for more details see: ${logFile}`)
     })
   }
 
-  private registerGeneratorsTask() {
+  private registerGeneratorsTask(): Listr.ListrTask {
     return {
       title: 'Register generators',
       task: async (ctx: any, task: ListrTaskWrapper) => {
-        let generatorNumber = this.rowGenerator
+        const generatorNumber = this.rowGenerator
           .registerGenerator(new NameFieldGenerator())
           .generatorNumber();
         task.output = `Register ${generatorNumber} generators`
@@ -62,7 +63,7 @@ export default class Generate extends Command {
     }
   }
 
-  private readSchemaTask() {
+  private readSchemaTask(): Listr.ListrTask {
     return {
       title: 'Read schema',
       task: async (ctx: any) => {
@@ -72,7 +73,7 @@ export default class Generate extends Command {
 
   }
 
-  private generateMockDataTask() {
+  private generateMockDataTask(): Listr.ListrTask {
     return {
       title: 'Generate data mocked',
       task: async (ctx: any, task: ListrTaskWrapper) => {
@@ -83,7 +84,7 @@ export default class Generate extends Command {
     }
   }
 
-  private generateFileTask() {
+  private generateFileTask(): Listr.ListrTask {
     return {
       title: 'Generate File',
       task: async (ctx: any, task: ListrTaskWrapper) => {

@@ -1,9 +1,9 @@
 export interface SchemaModel {
-  fields: FieldModel[]
+  fields: FieldModel[];
 }
 
 export interface FieldModel {
-  type: string,
-  name: string,
-  isNullable?: boolean
+  type: string;
+  name: string;
+  isNullable?: boolean;
 }
