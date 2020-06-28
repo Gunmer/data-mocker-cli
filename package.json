@@ -58,9 +58,11 @@
   "repository": "Gunmer/data-mocker-cli",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "pretest": "npm run lint",
     "test": "mocha",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "precoverage": "npm run lint",
     "coverage": "nyc mocha",
     "version": "oclif-dev readme && git add README.md"
   },
