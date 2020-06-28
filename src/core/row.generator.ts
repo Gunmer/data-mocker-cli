@@ -12,13 +12,13 @@ export class RowGenerator {
   private readonly fieldGenerators = new Map<string, FieldGenerator<any, any>>()
   private readonly stringService = new StringService()
 
-  registerGenerator(fieldGenerator: FieldGenerator<any, any>): RowGenerator {
+  register(fieldGenerator: FieldGenerator<any, any>): RowGenerator {
     const key = this.stringService.formatCamelCase(fieldGenerator.type);
     this.fieldGenerators.set(key, fieldGenerator)
     return this
   }
 
-  generatorNumber(): number {
+  count(): number {
     return this.fieldGenerators.size;
   }
 

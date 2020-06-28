@@ -56,8 +56,8 @@ export default class Generate extends Command {
       title: 'Register generators',
       task: async (ctx: any, task: ListrTaskWrapper) => {
         const generatorNumber = this.rowGenerator
-          .registerGenerator(new NameFieldGenerator())
-          .generatorNumber();
+          .register(new NameFieldGenerator())
+          .count();
         task.output = `Register ${generatorNumber} generators`
       }
     }
