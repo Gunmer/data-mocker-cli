@@ -2,7 +2,12 @@
   "fields": [
     {
       "type": "Name",
-      "name": "name"
+      "name": "First Name"
+    },
+    {
+      "type": "Name",
+      "name": "Second Name",
+      "isNullable": true
     }
   ]
 }
