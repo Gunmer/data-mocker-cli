@@ -2,7 +2,7 @@ name: CD
 
 on:
   push:
-    branches: 
+    branches:
     - release/*
 
 jobs:
@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: git config --global user.email "csosaur@gmail.com"
+    - run: git config --global user.name "Gunmer@github"
     - uses: actions/setup-node@v1
       with:
         node-version: 12.x
