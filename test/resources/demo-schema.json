@@ -8,6 +8,15 @@
       "type": "Name",
       "name": "Second Name",
       "isNullable": true
+    },
+    {
+      "type": "Surname",
+      "name": "last Name one"
+    },
+    {
+      "type": "Surname",
+      "name": "last name 2",
+      "isNullable": true
     }
   ]
 }
