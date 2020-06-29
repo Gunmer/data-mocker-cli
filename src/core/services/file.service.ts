@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import * as fs from 'fs';
 import * as path from 'path';
 import { FileNotFoundException } from '../exceptions/file-not-found.exception';
 import { InvalidFileExtensionException } from '../exceptions/invalid-file-extension.exception';
@@ -21,7 +21,8 @@ export class FileService {
     }
 
     try {
-      return fs.readJSONSync(pathFile, {encoding: 'utf-8'});
+      const schema = fs.readFileSync(pathFile, {encoding: 'utf-8'});
+      return JSON.parse(schema);
     }catch (e) {
       throw new InvalidJsonFormatException(e.message)
     }
@@ -38,13 +39,13 @@ export class FileService {
 
     const resultPath = path.join(process.cwd(), 'result.json');
 
-    fs.writeJSONSync(resultPath, jsonArray, {encoding: 'utf-8', spaces: 2})
+    fs.writeFileSync(resultPath, JSON.stringify(jsonArray, null, 2), {encoding: 'utf-8'})
     return resultPath
   }
 
   writeErrorLog(error: Error): string {
     const errorLogPath = path.join(process.cwd(), 'error.json');
-    fs.writeJSONSync(errorLogPath, error, {encoding: 'utf-8', spaces: 2})
+    fs.writeFileSync(errorLogPath, JSON.stringify(error, null, 2), {encoding: 'utf-8'})
     return errorLogPath
   }
 
