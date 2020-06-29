@@ -24,4 +24,15 @@ describe('NameFieldGenerator', () => {
     expect(result.key).equal(name)
     expect(source).contains(result.value)
   })
+
+  it('should generate null value, 1 of 4', () => {
+    const name = 'fist name'
+    const isNullable = true
+
+    let results = Array.from(Array(10).keys())
+      .map(() => generator.generate({type, name, isNullable}))
+
+    expect(results.every(r => r.key === name)).true
+    expect(results.some(r => !r.value)).true
+  })
 })
