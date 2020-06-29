@@ -1,5 +1,5 @@
 import { FieldModel } from '../core/schema.model';
 
-export interface NameFieldModel extends FieldModel {
+export interface SurnameFieldModel extends FieldModel {
   source?: string[];
 }

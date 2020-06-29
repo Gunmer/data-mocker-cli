@@ -1,9 +1,10 @@
 import { Command, flags } from '@oclif/command'
-import * as Listr from 'listr';
-import { ListrTaskWrapper } from 'listr';
-import { RowGenerator } from '../core/row.generator';
-import { FileService } from '../core/services/file.service';
-import { NameFieldGenerator } from '../name-field/name-field.generator';
+import * as Listr from 'listr'
+import { ListrTaskWrapper } from 'listr'
+import { RowGenerator } from '../core/row.generator'
+import { FileService } from '../core/services/file.service'
+import { NameFieldGenerator } from '../name-field/name-field.generator'
+import { SurnameFieldGenerator } from '../surname-field/surname-field.generator'
 
 // noinspection JSUnusedGlobalSymbols
 export default class Generate extends Command {
@@ -57,6 +58,7 @@ export default class Generate extends Command {
       task: async (ctx: any, task: ListrTaskWrapper) => {
         const generatorNumber = this.rowGenerator
           .register(new NameFieldGenerator())
+          .register(new SurnameFieldGenerator())
           .count();
         task.output = `Register ${generatorNumber} generators`
       }
