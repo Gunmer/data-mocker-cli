@@ -26,12 +26,5 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - uses: actions/setup-node@v1
-      with:
-        registry-url: 'https://npm.pkg.github.com'
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - run: git push
     - run: git push --tags
