@@ -13,4 +13,8 @@ export class RandomService {
     return array[index]
   }
 
+  randomNull(): boolean {
+    const number = this.randomBetween(1,4);
+    return number === 1;
+  }
 }
