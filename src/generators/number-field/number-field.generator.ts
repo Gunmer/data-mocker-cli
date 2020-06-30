@@ -11,7 +11,9 @@ export class NumberFieldGenerator extends FieldGenerator<NumberFieldModel, numbe
       return columnWithUndefined
     }
 
-    const number = this.randomService.randomBetween(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+    const min = field.min ?? Number.MIN_SAFE_INTEGER
+    const max = field.max ?? Number.MAX_SAFE_INTEGER
+    const number = this.randomService.randomBetween(min, max);
 
     return {key: field.name, value: number};
   }

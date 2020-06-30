@@ -25,4 +25,35 @@ describe('NumberFieldGenerator', () => {
     expect(results.every(r => r.key === name)).true
     expect(results.some(r => !r.value)).true
   })
+
+  it('should generate a number between min and max', () => {
+    const name = 'number';
+    const min = 5
+    const max = 10
+
+    const result = generator.generate({type, name, min, max});
+
+    expect(result.key).equal(name)
+    expect(result.value).gte(min).lte(max)
+  });
+
+  it('should generate a number less that max', () => {
+    const name = 'number';
+    const max = 10
+
+    const result = generator.generate({type, name, max});
+
+    expect(result.key).equal(name)
+    expect(result.value).lte(max)
+  });
+
+  it('should generate a number great that min', () => {
+    const name = 'number';
+    const min = 10
+
+    const result = generator.generate({type, name, min});
+
+    expect(result.key).equal(name)
+    expect(result.value).gte(min)
+  });
 })
