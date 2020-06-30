@@ -1,6 +1,6 @@
 import { expect } from '@oclif/test';
 import { RowGenerator } from '../../src/core/row.generator';
-import { NameFieldGenerator } from '../../src/name-field/name-field.generator';
+import { NameFieldGenerator } from '../../src/generators/name-field/name-field.generator';
 // @ts-ignore
 import { SchemaFixture } from './schema.fixture';
 

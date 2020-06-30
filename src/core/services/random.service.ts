@@ -4,17 +4,13 @@ export class RandomService {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  randomIndex(size: number): number {
-    return this.randomBetween(1, size) - 1;
-  }
-
   randomItem<T>(array: T[]): T {
-    const index = this.randomIndex(array.length);
+    const index = this.randomBetween(0, array.length - 1);
     return array[index]
   }
 
-  randomNull(): boolean {
-    const number = this.randomBetween(1,4);
-    return number === 1;
+  randomBoolean(percentTruly: number): boolean {
+    const number = this.randomBetween(1, 100);
+    return number <= percentTruly
   }
 }
