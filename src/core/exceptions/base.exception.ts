@@ -1,7 +1,5 @@
-export abstract class BaseException {
-  readonly message: string
-
+export abstract class BaseException extends Error {
   constructor(message: string) {
-    this.message = message
+    super(message);
   }
 }
