@@ -11,7 +11,7 @@ export abstract class FieldGenerator<P extends FieldModel, R> {
   generateColumnWithUndefined(field: P): ColumnModel<R> | undefined {
     const isNullable = field.isNullable ?? false;
 
-    if (isNullable && this.randomService.randomIsUndefined()) {
+    if (isNullable && this.randomService.randomBoolean(25)) {
       return {key: field.name, value: undefined}
     }
 
