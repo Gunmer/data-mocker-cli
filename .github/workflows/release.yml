@@ -5,42 +5,18 @@ on:
     branches:
     - release/*
 
-env:
-  BRANCH_NAME: $(git symbolic-ref HEAD)
-  VERSION_NUMBER : $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
-
 jobs:
   publish:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - run: git config --global user.email "csosaur@gmail.com"
-    - run: git config --global user.name "Gunmer@github"
-
     - uses: actions/setup-node@v1
       with:
         node-version: 12.x
-        registry-url: 'https://registry.npmjs.org'
-
     - run: npm install
     - run: npm test
-    - run: npm version ${{ env.VERSION_NUMBER }}
+    - run: npm version $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-    - run: git push --tags
-
-    - run: git fetch
-
-    - run: git checkout origin/master
-    - run: git merge --no-ff ${{ env.BRANCH_NAME }} -m ${{ env.VERSION_NUMBER }}
-    - run: git push
-
-    - run: git checkout develop
-    - run: git merge --no-ff ${{ env.BRANCH_NAME }} -m ${{ env.VERSION_NUMBER }}
-    - run: git push
-
-    - run: git push origin --delete ${{ env.BRANCH_NAME }}
