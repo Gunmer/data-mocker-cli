@@ -24,6 +24,7 @@ describe('NumberFieldGenerator', () => {
 
     expect(results.every(r => r.key === name)).true
     expect(results.some(r => !r.value)).true
+    expect(results.some(r => r.value)).true
   })
 
   it('should generate a number between min and max', () => {
