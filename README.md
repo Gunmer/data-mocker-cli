@@ -1,18 +1,18 @@
 data-mocker-cli
 ===============
 
-
 ![CI](https://github.com/Gunmer/data-mocker-cli/workflows/CI/badge.svg)
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/data-mocker-cli.svg)](https://npmjs.org/package/data-mocker-cli)
-[![Downloads/week](https://img.shields.io/npm/dw/data-mocker-cli.svg)](https://npmjs.org/package/data-mocker-cli)
-[![License](https://img.shields.io/npm/l/data-mocker-cli.svg)](https://github.com/Gunmer/data-mocker-cli/blob/master/package.json)
+![Downloads/week](https://img.shields.io/npm/dw/data-mocker-cli.svg)
+![License](https://img.shields.io/npm/l/data-mocker-cli.svg)
+[![codecov](https://codecov.io/gh/Gunmer/data-mocker-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/Gunmer/data-mocker-cli)
+![codecov](https://img.shields.io/badge/state-developing-red)
 
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
-# Usage
+## Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g data-mocker-cli
@@ -26,12 +26,12 @@ USAGE
 ...
 ```
 <!-- usagestop -->
-# Commands
+## Commands
 <!-- commands -->
 * [`dmcli generate NUMBER`](#dmcli-generate-number)
 * [`dmcli help [COMMAND]`](#dmcli-help-command)
 
-## `dmcli generate NUMBER`
+### `dmcli generate NUMBER`
 
 Generate a file with mock data in json, csv or sql insert format
 
@@ -50,7 +50,7 @@ OPTIONS
 
 _See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.2.2/src/commands/generate.ts)_
 
-## `dmcli help [COMMAND]`
+### `dmcli help [COMMAND]`
 
 display help for dmcli
 
