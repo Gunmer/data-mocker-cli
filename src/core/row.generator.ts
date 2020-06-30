@@ -1,12 +1,7 @@
-import { ColumnModel, RowModel } from './row.model';
-import { FieldModel, SchemaModel } from './schema.model';
+import { FieldGenerator } from './field.generator';
+import { RowModel } from './row.model';
+import { SchemaModel } from './schema.model';
 import { StringService } from './services/string.service';
-
-export interface FieldGenerator<P extends FieldModel, R> {
-  type: string;
-
-  generate(field: P): ColumnModel<R>;
-}
 
 export class RowGenerator {
   private readonly fieldGenerators = new Map<string, FieldGenerator<any, any>>()
