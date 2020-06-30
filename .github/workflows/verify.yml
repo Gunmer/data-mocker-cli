@@ -17,19 +17,13 @@ jobs:
         name: Setup node (last LTS)
         with:
           node-version: 12.x
+
       - run: npm install
-
-  check:
-    steps:
       - run: npm run lint
-
-  test:
-    steps:
       - run: npm run coverage
 
-  coverage:
-    steps:
       - uses: codecov/codecov-action@v1
+        name: Update coverage
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage/lcov.info
