@@ -24,7 +24,7 @@ jobs:
         version_number: $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
     - run: npm install
     - run: npm test
-    - run: npm version $(version_number)
+    - run: npm version ${{version_number}}
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -32,11 +32,11 @@ jobs:
     - run: git push --tags
 
     - run: git checkout master
-    - run: git merge --no-ff $(branch_name) -m $(version_number)
+    - run: git merge --no-ff ${{branch_name}} -m ${{version_number}}
     - run: git push
 
     - run: git checkout develop
-    - run: git merge --no-ff $(branch_name) -m $(version_number)
+    - run: git merge --no-ff ${{branch_name}} -m ${{version_number}}
     - run: git push
 
-    - run: git push origin --delete $(branch_name)
+    - run: git push origin --delete ${{branch_name}}
