@@ -8,29 +8,29 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x]
-
     steps:
       - uses: actions/checkout@v2
+        name: Download code
 
       - uses: actions/setup-node@v1
-        name: Use Node.js ${{ matrix.node-version }}
+        name: Setup node (last LTS)
         with:
-          node-version: ${{ matrix.node-version }}
-
+          node-version: 12.x
       - run: npm install
+
+  check:
+    steps:
       - run: npm run lint
+
+  test:
+    steps:
       - run: npm run coverage
 
+  coverage:
+    steps:
       - uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage/lcov.info
-          flags: unittests
-          name: codecov-umbrella
           fail_ci_if_error: true
