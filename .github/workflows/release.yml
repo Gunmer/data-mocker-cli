@@ -33,7 +33,9 @@ jobs:
 
     - run: git push --tags
 
-    - run: git checkout master
+    - run: git fetch
+
+    - run: git checkout origin/master
     - run: git merge --no-ff ${{ env.BRANCH_NAME }} -m ${{ env.VERSION_NUMBER }}
     - run: git push
 
