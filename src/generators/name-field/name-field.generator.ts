@@ -1,6 +1,6 @@
-import { FieldGenerator } from '../core/row.generator';
-import { ColumnModel } from '../core/row.model';
-import { RandomService } from '../core/services/random.service';
+import { FieldGenerator } from '../../core/row.generator';
+import { ColumnModel } from '../../core/row.model';
+import { RandomService } from '../../core/services/random.service';
 import { NameFieldModel } from './name-field.model';
 import { NameFieldSource } from './name-field.source';
 

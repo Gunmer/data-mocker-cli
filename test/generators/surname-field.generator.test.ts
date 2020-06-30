@@ -1,7 +1,7 @@
 import { expect } from '@oclif/test';
 import { it } from 'mocha';
-import { SurnameFieldGenerator } from '../../src/surname-field/surname-field.generator';
-import { SurnameFieldSource } from '../../src/surname-field/surname-field.source';
+import { SurnameFieldGenerator } from '../../src/generators/surname-field/surname-field.generator';
+import { SurnameFieldSource } from '../../src/generators/surname-field/surname-field.source';
 
 describe('SurnameFieldGenerator', () => {
   const generator = new SurnameFieldGenerator();
@@ -25,11 +25,11 @@ describe('SurnameFieldGenerator', () => {
     expect(source).contains(result.value)
   })
 
-  it('should generate null value, 1 of 4', () => {
+  it('should generate null value sometimes', () => {
     const name = 'last name'
     const isNullable = true
 
-    const results = Array.from(Array(10).keys())
+    const results = Array.from(Array(20).keys())
       .map(() => generator.generate({type, name, isNullable}))
 
     expect(results.every(r => r.key === name)).true
