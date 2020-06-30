@@ -5,14 +5,14 @@ on:
     branches:
     - release/*
 
+env:
+  BRANCH_NAME: $(git symbolic-ref HEAD)
+  VERSION_NUMBER : $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
 jobs:
   publish:
 
     runs-on: ubuntu-latest
-
-    env:
-      branch_name: $(git symbolic-ref HEAD)
-      version_number: $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
     steps:
     - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
 
     - run: npm install
     - run: npm test
-    - run: npm version ${{version_number}}
+    - run: npm version ${{ env.VERSION_NUMBER }}
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -34,11 +34,11 @@ jobs:
     - run: git push --tags
 
     - run: git checkout master
-    - run: git merge --no-ff ${{branch_name}} -m ${{version_number}}
+    - run: git merge --no-ff ${{ env.BRANCH_NAME }} -m ${{ env.VERSION_NUMBER }}
     - run: git push
 
     - run: git checkout develop
-    - run: git merge --no-ff ${{branch_name}} -m ${{version_number}}
+    - run: git merge --no-ff ${{ env.BRANCH_NAME }} -m ${{ env.VERSION_NUMBER }}
     - run: git push
 
-    - run: git push origin --delete ${{branch_name}}
+    - run: git push origin --delete ${{ env.BRANCH_NAME }}
