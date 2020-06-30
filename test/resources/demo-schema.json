@@ -1,6 +1,12 @@
 {
   "fields": [
     {
+      "type": "Number",
+      "name": "Id",
+      "isNullable": false,
+      "min": 1
+    },
+    {
       "type": "Name",
       "name": "First Name"
     },
@@ -17,6 +23,12 @@
       "type": "Surname",
       "name": "last name 2",
       "isNullable": true
+    },
+    {
+      "type": "Enum",
+      "name": "Gender",
+      "isNullable": true,
+      "source": ["Female", "Male", "Non-binary"]
     }
   ]
 }

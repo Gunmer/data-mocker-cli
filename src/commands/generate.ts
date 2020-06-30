@@ -3,7 +3,9 @@ import * as Listr from 'listr'
 import { ListrTaskWrapper } from 'listr'
 import { RowGenerator } from '../core/row.generator'
 import { FileService } from '../core/services/file.service'
+import { EnumFieldGenerator } from '../generators/enum-field/enum-field.generator';
 import { NameFieldGenerator } from '../generators/name-field/name-field.generator'
+import { NumberFieldGenerator } from '../generators/number-field/number-field.generator';
 import { SurnameFieldGenerator } from '../generators/surname-field/surname-field.generator'
 
 // noinspection JSUnusedGlobalSymbols
@@ -59,6 +61,8 @@ export default class Generate extends Command {
         const generatorNumber = this.rowGenerator
           .register(new NameFieldGenerator())
           .register(new SurnameFieldGenerator())
+          .register(new NumberFieldGenerator())
+          .register(new EnumFieldGenerator())
           .count();
         task.output = `Register ${generatorNumber} generators`
       }

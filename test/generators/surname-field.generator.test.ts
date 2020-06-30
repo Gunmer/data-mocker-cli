@@ -34,5 +34,6 @@ describe('SurnameFieldGenerator', () => {
 
     expect(results.every(r => r.key === name)).true
     expect(results.some(r => !r.value)).true
+    expect(results.some(r => r.value)).true
   })
 })
