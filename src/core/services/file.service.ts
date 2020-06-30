@@ -5,9 +5,11 @@ import { InvalidFileExtensionException } from '../exceptions/invalid-file-extens
 import { InvalidJsonFormatException } from '../exceptions/invalid-json-format.exception';
 import { RowModel } from '../row.model';
 import { SchemaModel } from '../schema.model';
+import { StringService } from './string.service';
 
 export class FileService {
   private readonly validExtensions = ['.json', '.JSON']
+  private readonly stringService = new StringService()
 
   readJson(pathFile: string): SchemaModel {
     const fileNotFound = !fs.existsSync(pathFile);
@@ -32,7 +34,8 @@ export class FileService {
     const jsonArray = rows.map(row => {
       const object: any = {}
       for (const column of row.columns) {
-        object[column.key] = column.value
+        const key = this.stringService.formatCamelCase(column.key);
+        object[key] = column.value
       }
       return object
     })

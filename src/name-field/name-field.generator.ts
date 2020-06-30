@@ -10,6 +10,11 @@ export class NameFieldGenerator implements FieldGenerator<NameFieldModel, string
   type = 'Name'
 
   generate(field: NameFieldModel): ColumnModel<string> {
+    const isNullable = field.isNullable ?? false;
+    if (isNullable && this.randomService.randomNull()) {
+      return {key: field.name, value: undefined}
+    }
+
     const names = field.source ?? NameFieldSource.source;
     const item = this.randomService.randomItem(names);
     return {key: field.name, value: item}

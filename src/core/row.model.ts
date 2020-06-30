@@ -4,5 +4,5 @@ export interface RowModel {
 
 export interface ColumnModel<T> {
   key: string;
-  value: T;
+  value?: T;
 }
