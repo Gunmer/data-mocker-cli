@@ -23,7 +23,7 @@ describe('RandomService', () => {
   it('randomNull should return null 25% of the time', () => {
     const total = 100000
     const trueResults = Array.from(Array(total).keys())
-      .map(() => service.randomNull())
+      .map(() => service.randomIsUndefined())
       .filter(r => r)
       .length
     const percentage = ((trueResults/total) * 100).toFixed(0)
