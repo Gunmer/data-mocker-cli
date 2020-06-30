@@ -11,12 +11,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: git config --global user.email $GITHUB_ACTOR"@github.com"
+    - run: git config --global user.name $GITHUB_ACTOR
+
     - uses: actions/setup-node@v1
       with:
         node-version: 12.x
+        registry-url: 'https://registry.npmjs.org'
     - run: npm install
     - run: npm test
     - run: npm version $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - run: git push
+    - run: git push --tags
