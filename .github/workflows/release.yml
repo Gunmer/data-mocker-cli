@@ -19,12 +19,24 @@ jobs:
       with:
         node-version: 12.x
         registry-url: 'https://registry.npmjs.org'
+      env:
+        branch_name: $(git symbolic-ref HEAD)
+        version_number: $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
     - run: npm install
     - run: npm test
-    - run: npm version $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+    - run: npm version $(version_number)
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - run: git push
     - run: git push --tags
+
+    - run: git checkout master
+    - run: git merge --no-ff $(branch_name) -m $(version_number)
+    - run: git push
+
+    - run: git checkout develop
+    - run: git merge --no-ff $(branch_name) -m $(version_number)
+    - run: git push
+
+    - run: git push origin --delete $(branch_name)
