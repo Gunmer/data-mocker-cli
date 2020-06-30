@@ -6,9 +6,13 @@ on:
     - release/*
 
 jobs:
-  build:
+  publish:
 
     runs-on: ubuntu-latest
+
+    env:
+      branch_name: $(git symbolic-ref HEAD)
+      version_number: $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
     steps:
     - uses: actions/checkout@v2
@@ -19,9 +23,7 @@ jobs:
       with:
         node-version: 12.x
         registry-url: 'https://registry.npmjs.org'
-      env:
-        branch_name: $(git symbolic-ref HEAD)
-        version_number: $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
     - run: npm install
     - run: npm test
     - run: npm version ${{version_number}}
