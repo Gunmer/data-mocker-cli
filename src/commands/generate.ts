@@ -6,6 +6,7 @@ import { FileService } from '../core/services/file.service'
 import { EnumFieldGenerator } from '../generators/enum-field/enum-field.generator';
 import { NameFieldGenerator } from '../generators/name-field/name-field.generator'
 import { NumberFieldGenerator } from '../generators/number-field/number-field.generator';
+import { StringFieldGenerator } from '../generators/string-field/string-field.generator';
 import { SurnameFieldGenerator } from '../generators/surname-field/surname-field.generator'
 
 // noinspection JSUnusedGlobalSymbols
@@ -63,6 +64,7 @@ export default class Generate extends Command {
           .register(new SurnameFieldGenerator())
           .register(new NumberFieldGenerator())
           .register(new EnumFieldGenerator())
+          .register(new StringFieldGenerator())
           .count();
         task.output = `Register ${generatorNumber} generators`
       }

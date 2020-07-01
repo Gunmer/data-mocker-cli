@@ -29,6 +29,12 @@
       "name": "Gender",
       "isNullable": true,
       "source": ["Female", "Male", "Non-binary"]
+    },
+    {
+      "type": "String",
+      "name": "Description",
+      "min": 25,
+      "max": 100
     }
   ]
 }
