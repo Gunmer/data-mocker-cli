@@ -52,4 +52,11 @@ export class FileService {
     return errorLogPath
   }
 
+  writeSql(rows: RowModel[]): string {
+    return 'result.sql'
+  }
+
+  writeCsv(rows: RowModel[]): string {
+    return 'result.csv'
+  }
 }
