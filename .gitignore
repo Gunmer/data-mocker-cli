@@ -10,3 +10,4 @@ node_modules
 /error.log
 /error.json
 /coverage
+/result.sql

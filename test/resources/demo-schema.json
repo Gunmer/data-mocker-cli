@@ -1,4 +1,5 @@
 {
+  "tableName": "people",
   "fields": [
     {
       "type": "Number",

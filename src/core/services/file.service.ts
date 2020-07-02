@@ -52,8 +52,35 @@ export class FileService {
     return errorLogPath
   }
 
-  writeSql(rows: RowModel[]): string {
-    return 'result.sql'
+  writeSql(rows: RowModel[], tableName = 'table_name'): string {
+    const sqlComponents: SqlComponents[] = rows.map(r =>  {
+      return  {
+        columns: r.columns.map(c => this.stringService.formatCamelCase(c.key)),
+        values: r.columns.map(c => this.formatOutputValue(c.value))
+      }
+    })
+
+    const inserts = sqlComponents.map(s => {
+      return `INSERT INTO ${tableName} (${s.columns.join(',')}) VALUES (${s.values.join(',')});`
+    })
+
+    const resultPath = path.join(process.cwd(), 'result.sql');
+    fs.writeFileSync(resultPath, inserts.join('\n'), {encoding: 'utf-8'})
+
+    return resultPath
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private formatOutputValue(value?: any): any | undefined {
+    if (!value) {
+      return 'NULL';
+    }
+
+    if(typeof value === 'number') {
+      return value
+    }
+
+    return `'${value}'`
   }
 
   writeCsv(rows: RowModel[]): string {
@@ -63,5 +90,5 @@ export class FileService {
 
 interface SqlComponents {
   columns: string[];
-  values: string[];
+  values: any[];
 }

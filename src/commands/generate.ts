@@ -79,7 +79,6 @@ export default class Generate extends Command {
         ctx.schema = this.fileService.readJson(ctx.flags.schema)
       }
     }
-
   }
 
   private generateMockDataTask(): Listr.ListrTask {
@@ -102,7 +101,7 @@ export default class Generate extends Command {
             ctx.outputFile = this.fileService.writeJson(ctx.rows)
             break
           case 'sql':
-            ctx.outputFile = this.fileService.writeSql(ctx.rows)
+            ctx.outputFile = this.fileService.writeSql(ctx.rows, ctx.schema.tableName)
             break
           case 'csv':
             ctx.outputFile = this.fileService.writeCsv(ctx.rows)
