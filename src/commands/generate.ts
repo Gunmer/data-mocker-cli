@@ -6,6 +6,7 @@ import { FileService } from '../core/services/file.service'
 import { EnumFieldGenerator } from '../generators/enum-field/enum-field.generator';
 import { NameFieldGenerator } from '../generators/name-field/name-field.generator'
 import { NumberFieldGenerator } from '../generators/number-field/number-field.generator';
+import { StringFieldGenerator } from '../generators/string-field/string-field.generator';
 import { SurnameFieldGenerator } from '../generators/surname-field/surname-field.generator'
 
 // noinspection JSUnusedGlobalSymbols
@@ -32,7 +33,8 @@ export default class Generate extends Command {
       char: 'o',
       description: 'Output file format',
       required: false,
-      options: ['sql', 'json', 'csv']
+      options: ['sql', 'json', 'csv'],
+      default: 'json'
     }),
   }
 
@@ -63,6 +65,7 @@ export default class Generate extends Command {
           .register(new SurnameFieldGenerator())
           .register(new NumberFieldGenerator())
           .register(new EnumFieldGenerator())
+          .register(new StringFieldGenerator())
           .count();
         task.output = `Register ${generatorNumber} generators`
       }
@@ -76,7 +79,6 @@ export default class Generate extends Command {
         ctx.schema = this.fileService.readJson(ctx.flags.schema)
       }
     }
-
   }
 
   private generateMockDataTask(): Listr.ListrTask {
@@ -94,7 +96,18 @@ export default class Generate extends Command {
     return {
       title: 'Generate File',
       task: async (ctx: any, task: ListrTaskWrapper) => {
-        ctx.outputFile = this.fileService.writeJson(ctx.rows)
+        switch (ctx.flags.output) {
+          case 'json':
+            ctx.outputFile = this.fileService.writeJson(ctx.rows)
+            break
+          case 'sql':
+            ctx.outputFile = this.fileService.writeSql(ctx.rows, ctx.schema.tableName)
+            break
+          case 'csv':
+            ctx.outputFile = this.fileService.writeCsv(ctx.rows)
+            break
+        }
+
         task.title = `Generate File: ${ctx.outputFile}`
       }
     }

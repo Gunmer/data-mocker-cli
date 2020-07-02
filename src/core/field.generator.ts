@@ -1,5 +1,5 @@
-import { ColumnModel } from './row.model';
-import { FieldModel } from './schema.model';
+import { ColumnModel } from './models/column.model';
+import { FieldModel } from './models/field.model';
 import { RandomService } from './services/random.service';
 
 export abstract class FieldGenerator<P extends FieldModel, R> {

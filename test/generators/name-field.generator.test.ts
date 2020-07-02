@@ -29,7 +29,7 @@ describe('NameFieldGenerator', () => {
     const name = 'fist name'
     const isNullable = true
 
-    const results = Array.from(Array(20).keys())
+    const results = Array.from(Array(100).keys())
       .map(() => generator.generate({type, name, isNullable}))
 
     expect(results.every(r => r.key === name)).true

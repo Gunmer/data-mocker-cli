@@ -1,6 +1,6 @@
 import { FieldGenerator } from './field.generator';
-import { RowModel } from './row.model';
-import { SchemaModel } from './schema.model';
+import { RowModel } from './models/row.model';
+import { SchemaModel } from './models/schema.model';
 import { StringService } from './services/string.service';
 
 export class RowGenerator {
