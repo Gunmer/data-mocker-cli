@@ -83,6 +83,7 @@ export class FileService {
     return `'${value}'`
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   writeCsv(rows: RowModel[]): string {
     return 'result.csv'
   }
