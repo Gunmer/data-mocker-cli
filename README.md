@@ -9,9 +9,11 @@ data-mocker-cli
 ![codecov](https://img.shields.io/badge/state-developing-red)
 
 <!-- toc -->
+* [Summary](#summary)
 * [Usage](#usage)
 * [Commands](#commands)
 * [Schema file](#schema-file)
+* [Field types](#field-types)
 <!-- tocstop -->
 # Summary
 Cli to generate a test data set, with it you can generate any flat data structure, being able to specify the type of each field or attribute.
@@ -26,7 +28,7 @@ $ npm install -g data-mocker-cli
 $ dmcli COMMAND
 running command...
 $ dmcli (-v|--version|version)
-data-mocker-cli/0.3.2 darwin-x64 node-v12.7.0
+data-mocker-cli/0.4.0 linux-x64 node-v12.18.1
 $ dmcli --help [COMMAND]
 USAGE
   $ dmcli COMMAND
@@ -51,11 +53,11 @@ ARGUMENTS
 
 OPTIONS
   -h, --help                 show CLI help
-  -o, --output=sql|json|csv  Output file format
+  -o, --output=sql|json|csv  [default: json] Output file format
   -s, --schema=schema        (required) Schema of the data to be generated
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.3.2/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.4.0/src/commands/generate.ts)_
 
 ## `dmcli help [COMMAND]`
 
