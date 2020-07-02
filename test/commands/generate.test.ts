@@ -15,14 +15,14 @@ describe('generate', () => {
 
   test
     .stdout()
-    .command(['generate', '1', '-s', './test/resources/demo-schema.json', '-o', 'sql'])
+    .command(['generate', '10', '-s', './test/resources/demo-schema.json', '-o', 'sql'])
     .it('should generate file when schema is correct', ctx => {
       expect(ctx.stdout).to.contain('result.sql')
     })
 
   test
     .stdout()
-    .command(['generate', '1', '-s', './test/resources/demo-schema.json', '-o', 'csv'])
+    .command(['generate', '10', '-s', './test/resources/demo-schema.json', '-o', 'csv'])
     .it('should generate file when schema is correct', ctx => {
       expect(ctx.stdout).to.contain('result.csv')
     })

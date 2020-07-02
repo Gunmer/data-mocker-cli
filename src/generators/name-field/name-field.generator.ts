@@ -1,5 +1,5 @@
 import { FieldGenerator } from '../../core/field.generator';
-import { ColumnModel } from '../../core/row.model';
+import { ColumnModel } from '../../core/models/column.model';
 import { NameFieldModel } from './name-field.model';
 import { NameFieldSource } from './name-field.source';
 

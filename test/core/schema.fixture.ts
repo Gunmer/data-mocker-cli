@@ -1,4 +1,5 @@
-import { FieldModel, SchemaModel } from '../../src/core/schema.model';
+import { FieldModel } from '../../src/core/models/field.model';
+import { SchemaModel } from '../../src/core/models/schema.model';
 
 export class SchemaFixture {
   static getSchema(...fields: FieldFixtureOptions[]): SchemaModel {

@@ -1,5 +1,5 @@
 import { FieldGenerator } from '../../core/field.generator';
-import { ColumnModel } from '../../core/row.model';
+import { ColumnModel } from '../../core/models/column.model';
 import { EmptySourceException } from './empty-source.exception';
 import { EnumFieldModel } from './enum-field.model';
 
