@@ -1,5 +1,5 @@
 import { FieldGenerator } from '../../core/field.generator';
-import { ColumnModel } from '../../core/row.model';
+import { ColumnModel } from '../../core/models/column.model';
 import { NumberFieldModel } from './number-field.model';
 
 export class NumberFieldGenerator extends FieldGenerator<NumberFieldModel, number> {

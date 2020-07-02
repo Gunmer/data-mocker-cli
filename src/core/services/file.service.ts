@@ -3,8 +3,8 @@ import * as path from 'path';
 import { FileNotFoundException } from '../exceptions/file-not-found.exception';
 import { InvalidFileExtensionException } from '../exceptions/invalid-file-extension.exception';
 import { InvalidJsonFormatException } from '../exceptions/invalid-json-format.exception';
-import { RowModel } from '../row.model';
-import { SchemaModel } from '../schema.model';
+import { RowModel } from '../models/row.model';
+import { SchemaModel } from '../models/schema.model';
 import { StringService } from './string.service';
 
 export class FileService {
@@ -52,4 +52,44 @@ export class FileService {
     return errorLogPath
   }
 
+  writeSql(rows: RowModel[], tableName = 'table_name'): string {
+    const sqlComponents: SqlComponents[] = rows.map(r =>  {
+      return  {
+        columns: r.columns.map(c => this.stringService.formatCamelCase(c.key)),
+        values: r.columns.map(c => this.formatOutputValue(c.value))
+      }
+    })
+
+    const inserts = sqlComponents.map(s => {
+      return `INSERT INTO ${tableName} (${s.columns.join(',')}) VALUES (${s.values.join(',')});`
+    })
+
+    const resultPath = path.join(process.cwd(), 'result.sql');
+    fs.writeFileSync(resultPath, inserts.join('\n'), {encoding: 'utf-8'})
+
+    return resultPath
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private formatOutputValue(value?: any): any | undefined {
+    if (!value) {
+      return 'NULL';
+    }
+
+    if(typeof value === 'number') {
+      return value
+    }
+
+    return `'${value}'`
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  writeCsv(rows: RowModel[]): string {
+    return 'result.csv'
+  }
+}
+
+interface SqlComponents {
+  columns: string[];
+  values: any[];
 }

@@ -1,6 +1,6 @@
 import { FieldModel } from '../../core/models/field.model';
 
-export interface NumberFieldModel extends FieldModel {
-  max?: number;
+export interface StringFieldModel extends FieldModel {
   min?: number;
+  max: number;
 }
