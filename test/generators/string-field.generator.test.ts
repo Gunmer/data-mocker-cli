@@ -22,7 +22,7 @@ describe('StringFieldGenerator', () => {
     const max = 10;
     const isNullable = true
 
-    const results = Array.from(Array(20).keys())
+    const results = Array.from(Array(100).keys())
       .map(() => generator.generate({type, name, max, isNullable}))
 
     expect(results.every(r => r.key === name)).true
