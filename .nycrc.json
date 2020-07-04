@@ -7,5 +7,5 @@
   "instrument": true,
   "include": ["src/**/*.ts"],
   "exclude": ["src/index.ts", "src/**/*.model.ts"],
-  "reporter": ["lcov", "text-summary"]
+  "reporter": ["lcov", "text", "text-summary"]
 }
