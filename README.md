@@ -6,7 +6,6 @@ data-mocker-cli
 ![Downloads/week](https://img.shields.io/npm/dw/data-mocker-cli.svg)
 ![License](https://img.shields.io/npm/l/data-mocker-cli.svg)
 [![codecov](https://codecov.io/gh/Gunmer/data-mocker-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/Gunmer/data-mocker-cli)
-![codecov](https://img.shields.io/badge/state-developing-red)
 
 <!-- toc -->
 * [Summary](#summary)
@@ -80,8 +79,11 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0
 # Schema file
 The schema file is a json that contains a list of the fields that each data must have.
 
+If you want to export in sql format, you can report the name of the table within the schema.json
+
 ```json
 {
+  "tableName": "people",
   "fields": [
     {
       "type": "Number",
