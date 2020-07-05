@@ -1,6 +1,6 @@
 {
   "name": "data-mocker-cli",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "author": "Cristiam Sosa @Gunmer",
   "bin": {
     "dmcli": "./bin/run"
