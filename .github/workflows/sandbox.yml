@@ -26,10 +26,8 @@ jobs:
       run: echo Hello, $NAME
     - name: Script
       run: |
-        git checkout master
-        git checkout $GITHUB_REF
-        git commit --amend -m $NAME
-        git log
+        export BRANCH=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+        echo ${BRANCH}
         git checkout master
     - name: Show env
       run: |
