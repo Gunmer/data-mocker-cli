@@ -32,6 +32,16 @@
       "source": ["Female", "Male", "Non-binary"]
     },
     {
+      "type": "Phone",
+      "name": "Mobile",
+      "prefix": "+34",
+      "pattern": "6dd dd dd dd"
+    },
+    {
+      "type": "Email",
+      "name": "Email"
+    },
+    {
       "type": "String",
       "name": "Description",
       "min": 25,

@@ -11,10 +11,12 @@ export class PhoneFieldGenerator extends FieldGenerator<PhoneFieldModel, string>
       return columnWithUndefined
     }
 
-    const prefix = field.prefix ?? ''
     const pattern = field.pattern ?? 'ddddddddd'
+    let phone = `${pattern}`
 
-    let phone = `${prefix} ${pattern}`
+    if (field.prefix) {
+      phone = `${field.prefix} ${pattern}`
+    }
 
     do {
       const digit = this.randomService.randomBetween(0,9)

@@ -18,21 +18,21 @@ describe('PhoneFieldGenerator', () => {
   it('should be generate a phone number with prefix', () => {
     const name = 'phone'
     const prefix = '+34'
+
     const result = generator.generate({type, name, prefix})
 
     expect(result.key).to.equal(name)
-    expect(result.value?.startsWith(prefix)).to.true
+    expect(result.value).to.match(/^\+34\s\d{9}/)
 
   })
 
-  it('should be generate a phone number with prefix', () => {
+  it('should be generate a phone number with pattern', () => {
     const name = 'phone'
     const pattern = '6dd-ddd-ddd'
     const result = generator.generate({type, name, pattern})
 
     expect(result.key).to.equal(name)
-    expect(result.value?.startsWith('6')).to.true
-    expect(result.value).to.match(/\d\d\d-\d\d\d-\d\d\d/)
+    expect(result.value).to.match(/^6\d\d-\d\d\d-\d\d\d/)
 
   })
 
