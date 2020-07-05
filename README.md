@@ -163,3 +163,11 @@ Generate a random surname
 | Attribute | Description                      | Required |
 |-----------|----------------------------------|----------|
 | source    | Array of surnames to choose from | False    |
+
+### Email
+Generate a random email with default or specific username and domain 
+
+| Attribute | Description                       | Required |
+|-----------|-----------------------------------|----------|
+| userNames | Array of usernames to choose from | False    |
+| domains   | Array of domains to choose from   | False    |
