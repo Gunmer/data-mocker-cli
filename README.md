@@ -107,6 +107,18 @@ If you want to export in sql format, you can report the name of the table within
       "source": ["Female", "Male", "Non-binary"]
     },
     {
+      "type": "Phone",
+      "name": "Mobile",
+      "prefix": "+34",
+      "pattern": "6dd dd dd dd"
+    },
+    {
+      "type": "Email",
+      "name": "Email",
+      "userNames": ["gunmer", "ironMan", "spiderman"],
+      "domains": ["private.es"]
+    },
+    {
       "type": "String",
       "name": "Description",
       "min": 25,
@@ -120,11 +132,11 @@ If you want to export in sql format, you can report the name of the table within
 
 All fields contain the following attributes:
 
-| Attribute  | Description                                                                | Required                |
-|------------|----------------------------------------------------------------------------|-------------------------|
-| type       | Indicates the type of the field, if it is a name, surname, number, etc... | Yes                     |
-| name       | Name of the field with which the data will be created                      | Yes                     |
-| isNullable | If true 25% of data contains an undefined value in the field               | No, by default is false |
+| Attribute  | Description                                                                | Required | Default |
+|------------|----------------------------------------------------------------------------|----------|---------|
+| type       | Indicates the type of the field, if it is a name, surname, number, etc...  | Yes      |         |
+| name       | Name of the field with which the data will be created                      | Yes      |         |
+| isNullable | If true 25% of data contains an undefined value in the field               | No       | false   |
 
 # Field types
 ### String
@@ -138,10 +150,10 @@ Generates a text string (lorem ipsum) up to the maximum number of characters ind
 ### Number
 Generate integers
 
-| Attribute | Description   | Required                            |
-|-----------|---------------|-------------------------------------|
-| min       | Minimum value | False, by default −9007199254740991 |
-| max       | Maximum value | False, by default 9007199254740991  |
+| Attribute | Description   | Required | Default           |
+|-----------|---------------|----------|-------------------|
+| min       | Minimum value | False    | −9007199254740991 |
+| max       | Maximum value | False    | 9007199254740991  |
 
 ### Enum
 Randomly choose a value from the reported source
@@ -175,7 +187,7 @@ Generate a random email with default or specific username and domain
 ### Phone
 Generate a random phone number with a pattern and prefix if needed
 
-| Attribute | Description                             | Required                    |
-|-----------|-----------------------------------------|-----------------------------|
-| prefix    | Set the prefix number                   | False                       |
-| pattern   | Set the patter with 'd' of phone number | False, by default ddddddddd |
+| Attribute | Description                             | Required | Default   |
+|-----------|-----------------------------------------|----------|-----------|
+| prefix    | Set the prefix number                   | False    | Empty     |
+| pattern   | Set the patter with 'd' of phone number | False    | ddddddddd |
