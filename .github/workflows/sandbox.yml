@@ -1,0 +1,66 @@
+name: Sandbox
+on:
+  push:
+
+env:
+  NAME: cristiam
+  BRANCH: $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+jobs:
+
+  job1:
+    runs-on: ubuntu-latest
+
+    env:
+      NAME: job1
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - run: git config --global user.email $GITHUB_ACTOR"@github.com"
+    - run: git config --global user.name $GITHUB_ACTOR
+
+    - name: Say hello ${{ env.NAME }}
+      run: echo Hello, $NAME
+    - name: Script
+      run: |
+        git checkout master
+        git checkout $GITHUB_REF
+        git commit --amend -m $NAME
+        git log
+        git checkout master
+    - name: Show env
+      run: |
+        echo NAME: $NAME
+        echo BRANCH: ${{ env.BRANCH }}
+        echo CI: ${{  env.CI }}
+        echo HOME: ${{ env.HOME  }}
+        echo GITHUB_WORKFLOW: $GITHUB_WORKFLOW
+        echo GITHUB_RUN_ID: $GITHUB_RUN_ID
+        echo GITHUB_RUN_NUMBER: $GITHUB_RUN_NUMBER
+        echo GITHUB_ACTION: $GITHUB_ACTION
+        echo GITHUB_ACTIONS: $GITHUB_ACTIONS
+        echo GITHUB_ACTOR: $GITHUB_ACTOR
+        echo GITHUB_REPOSITORY: $GITHUB_REPOSITORY
+        echo GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME
+        echo GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH
+        echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE
+        echo GITHUB_SHA: $GITHUB_SHA
+        echo GITHUB_REF: $GITHUB_REF
+        echo GITHUB_HEAD_REF: ${{ env.GITHUB_HEAD_REF }}
+        echo GITHUB_BASE_REF: ${{ env.GITHUB_BASE_REF }}
+    - run: git status
+
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say hello ${{ env.NAME }}
+        run: echo Hello, $NAME
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master
+      - run: git status
