@@ -3,9 +3,11 @@ import * as Listr from 'listr'
 import { ListrTaskWrapper } from 'listr'
 import { RowGenerator } from '../core/row.generator'
 import { FileService } from '../core/services/file.service'
+import { EmailFieldGenerator } from '../generators/email-field/email-field.generator';
 import { EnumFieldGenerator } from '../generators/enum-field/enum-field.generator';
 import { NameFieldGenerator } from '../generators/name-field/name-field.generator'
 import { NumberFieldGenerator } from '../generators/number-field/number-field.generator';
+import { PhoneFieldGenerator } from '../generators/phone-field/phone-field.generator';
 import { StringFieldGenerator } from '../generators/string-field/string-field.generator';
 import { SurnameFieldGenerator } from '../generators/surname-field/surname-field.generator'
 
@@ -66,6 +68,8 @@ export default class Generate extends Command {
           .register(new NumberFieldGenerator())
           .register(new EnumFieldGenerator())
           .register(new StringFieldGenerator())
+          .register(new EmailFieldGenerator())
+          .register(new PhoneFieldGenerator())
           .count();
         task.output = `Register ${generatorNumber} generators`
       }

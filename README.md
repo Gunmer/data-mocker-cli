@@ -6,7 +6,6 @@ data-mocker-cli
 ![Downloads/week](https://img.shields.io/npm/dw/data-mocker-cli.svg)
 ![License](https://img.shields.io/npm/l/data-mocker-cli.svg)
 [![codecov](https://codecov.io/gh/Gunmer/data-mocker-cli/branch/master/graph/badge.svg)](https://codecov.io/gh/Gunmer/data-mocker-cli)
-![codecov](https://img.shields.io/badge/state-developing-red)
 
 <!-- toc -->
 * [Summary](#summary)
@@ -28,7 +27,7 @@ $ npm install -g data-mocker-cli
 $ dmcli COMMAND
 running command...
 $ dmcli (-v|--version|version)
-data-mocker-cli/0.4.0 linux-x64 node-v12.18.1
+data-mocker-cli/1.0.0 linux-x64 node-v12.18.1
 $ dmcli --help [COMMAND]
 USAGE
   $ dmcli COMMAND
@@ -57,7 +56,7 @@ OPTIONS
   -s, --schema=schema        (required) Schema of the data to be generated
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v0.4.0/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v1.0.0/src/commands/generate.ts)_
 
 ## `dmcli help [COMMAND]`
 
@@ -80,8 +79,11 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0
 # Schema file
 The schema file is a json that contains a list of the fields that each data must have.
 
+If you want to export in sql format, you can report the name of the table within the schema.json
+
 ```json
 {
+  "tableName": "people",
   "fields": [
     {
       "type": "Number",
@@ -105,6 +107,18 @@ The schema file is a json that contains a list of the fields that each data must
       "source": ["Female", "Male", "Non-binary"]
     },
     {
+      "type": "Phone",
+      "name": "Mobile",
+      "prefix": "+34",
+      "pattern": "6dd dd dd dd"
+    },
+    {
+      "type": "Email",
+      "name": "Email",
+      "userNames": ["gunmer", "ironMan", "spiderman"],
+      "domains": ["private.es"]
+    },
+    {
       "type": "String",
       "name": "Description",
       "min": 25,
@@ -118,11 +132,11 @@ The schema file is a json that contains a list of the fields that each data must
 
 All fields contain the following attributes:
 
-| Attribute  | Description                                                                | Required                |
-|------------|----------------------------------------------------------------------------|-------------------------|
-| type       | Indicates the type of the field, if it is a name, surname, number, etc... | Yes                     |
-| name       | Name of the field with which the data will be created                      | Yes                     |
-| isNullable | If true 25% of data contains an undefined value in the field               | No, by default is false |
+| Attribute  | Description                                                                | Required | Default |
+|------------|----------------------------------------------------------------------------|----------|---------|
+| type       | Indicates the type of the field, if it is a name, surname, number, etc...  | Yes      |         |
+| name       | Name of the field with which the data will be created                      | Yes      |         |
+| isNullable | If true 25% of data contains an undefined value in the field               | No       | false   |
 
 # Field types
 ### String
@@ -136,10 +150,10 @@ Generates a text string (lorem ipsum) up to the maximum number of characters ind
 ### Number
 Generate integers
 
-| Attribute | Description   | Required                            |
-|-----------|---------------|-------------------------------------|
-| min       | Minimum value | False, by default −9007199254740991 |
-| max       | Maximum value | False, by default 9007199254740991  |
+| Attribute | Description   | Required | Default           |
+|-----------|---------------|----------|-------------------|
+| min       | Minimum value | False    | −9007199254740991 |
+| max       | Maximum value | False    | 9007199254740991  |
 
 ### Enum
 Randomly choose a value from the reported source
@@ -161,3 +175,19 @@ Generate a random surname
 | Attribute | Description                      | Required |
 |-----------|----------------------------------|----------|
 | source    | Array of surnames to choose from | False    |
+
+### Email
+Generate a random email with default or specific username and domain 
+
+| Attribute | Description                       | Required |
+|-----------|-----------------------------------|----------|
+| userNames | Array of usernames to choose from | False    |
+| domains   | Array of domains to choose from   | False    |
+
+### Phone
+Generate a random phone number with a pattern and prefix if needed
+
+| Attribute | Description                             | Required | Default   |
+|-----------|-----------------------------------------|----------|-----------|
+| prefix    | Set the prefix number                   | False    | Empty     |
+| pattern   | Set the patter with 'd' of phone number | False    | ddddddddd |

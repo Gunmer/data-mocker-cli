@@ -11,3 +11,4 @@ node_modules
 /error.json
 /coverage
 /result.sql
+/result.csv

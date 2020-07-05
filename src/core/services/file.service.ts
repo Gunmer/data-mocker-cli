@@ -31,19 +31,22 @@ export class FileService {
   }
 
   writeJson(rows: RowModel[]): string {
-    const jsonArray = rows.map(row => {
+    const jsonArray = this.parseObject(rows)
+    const resultPath = path.join(process.cwd(), 'result.json');
+
+    fs.writeFileSync(resultPath, JSON.stringify(jsonArray, null, 2), {encoding: 'utf-8'})
+    return resultPath
+  }
+
+  private parseObject(rows: RowModel[]): any[] {
+    return rows.map(row => {
       const object: any = {}
       for (const column of row.columns) {
         const key = this.stringService.formatCamelCase(column.key);
         object[key] = column.value
       }
       return object
-    })
-
-    const resultPath = path.join(process.cwd(), 'result.json');
-
-    fs.writeFileSync(resultPath, JSON.stringify(jsonArray, null, 2), {encoding: 'utf-8'})
-    return resultPath
+    });
   }
 
   writeErrorLog(error: Error): string {
@@ -73,7 +76,7 @@ export class FileService {
   // noinspection JSMethodCanBeStatic
   private formatOutputValue(value?: any): any | undefined {
     if (!value) {
-      return 'NULL';
+      return 'NULL'
     }
 
     if(typeof value === 'number') {
@@ -83,9 +86,24 @@ export class FileService {
     return `'${value}'`
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   writeCsv(rows: RowModel[]): string {
-    return 'result.csv'
+    const headers = rows[0].columns.map(r => this.stringService.formatCamelCase(r.key))
+    const values = this.parseObject(rows)
+
+    const lines = values.map(obj => {
+      const values = headers.map(h => {
+        return this.formatOutputValue(obj[h])
+      })
+      return values.join(',');
+    })
+
+    const finalLines = [headers.map(h => `'${h}'`).join(',')]
+    finalLines.push(...lines)
+
+    const resultPath = path.join(process.cwd(), 'result.csv');
+    fs.writeFileSync(resultPath, finalLines.join('\n'), {encoding: 'utf-8'})
+
+    return resultPath
   }
 }
 
