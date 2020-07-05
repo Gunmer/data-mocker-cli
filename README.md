@@ -171,3 +171,11 @@ Generate a random email with default or specific username and domain
 |-----------|-----------------------------------|----------|
 | userNames | Array of usernames to choose from | False    |
 | domains   | Array of domains to choose from   | False    |
+
+### Phone
+Generate a random phone number with a pattern and prefix if needed
+
+| Attribute | Description                             | Required                    |
+|-----------|-----------------------------------------|-----------------------------|
+| prefix    | Set the prefix number                   | False                       |
+| pattern   | Set the patter with 'd' of phone number | False, by default ddddddddd |
