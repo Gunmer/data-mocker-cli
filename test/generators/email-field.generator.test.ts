@@ -16,7 +16,6 @@ describe('EmailFieldGenerator', () => {
     expect(result.value).to.not.undefined
     expect(userName).to.not.undefined
     expect(domain).to.not.undefined
-    expect(EmailFieldSource.userNames).to.contain(userName)
     expect(EmailFieldSource.domains).to.contain(domain)
 
   })
@@ -33,7 +32,6 @@ describe('EmailFieldGenerator', () => {
     expect(result.value).to.not.undefined
     expect(userName).to.not.undefined
     expect(domain).to.not.undefined
-    expect(userNames).to.contain(userName)
     expect(domains).to.contain(domain)
 
   })
