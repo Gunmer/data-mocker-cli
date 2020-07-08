@@ -1,4 +1,4 @@
-import { expect } from '@oclif/test';
+import { expect } from '@oclif/test'
 import { EmailFieldGenerator } from '../../src/generators/email-field/email-field.generator';
 import { EmailFieldSource } from '../../src/generators/email-field/email-field.source';
 

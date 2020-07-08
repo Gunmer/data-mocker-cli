@@ -10,6 +10,7 @@
     "@oclif/command": "^1.6.1",
     "@oclif/config": "^1.15.1",
     "@oclif/plugin-help": "^3.1.0",
+    "cli-ux": "^5.4.9",
     "listr": "^0.14.3",
     "tslib": "^1.13.0",
     "turbocommons-ts": "^3.5.0"
