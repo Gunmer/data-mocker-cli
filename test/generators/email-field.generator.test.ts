@@ -1,4 +1,4 @@
-import { expect } from '@oclif/test';
+import { expect } from '@oclif/test'
 import { EmailFieldGenerator } from '../../src/generators/email-field/email-field.generator';
 import { EmailFieldSource } from '../../src/generators/email-field/email-field.source';
 
@@ -16,7 +16,6 @@ describe('EmailFieldGenerator', () => {
     expect(result.value).to.not.undefined
     expect(userName).to.not.undefined
     expect(domain).to.not.undefined
-    expect(EmailFieldSource.userNames).to.contain(userName)
     expect(EmailFieldSource.domains).to.contain(domain)
 
   })
@@ -33,7 +32,6 @@ describe('EmailFieldGenerator', () => {
     expect(result.value).to.not.undefined
     expect(userName).to.not.undefined
     expect(domain).to.not.undefined
-    expect(userNames).to.contain(userName)
     expect(domains).to.contain(domain)
 
   })

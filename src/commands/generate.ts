@@ -1,4 +1,5 @@
 import { Command, flags } from '@oclif/command'
+import cli from 'cli-ux'
 import * as Listr from 'listr'
 import { ListrTaskWrapper } from 'listr'
 import { RowGenerator } from '../core/row.generator'
@@ -44,6 +45,7 @@ export default class Generate extends Command {
   private readonly rowGenerator = new RowGenerator()
 
   async run() {
+    cli.action.start('Generating file')
     const ctx = this.parse(Generate)
 
     const tasks = new Listr();
@@ -56,6 +58,7 @@ export default class Generate extends Command {
       const logFile = this.fileService.writeErrorLog(reason);
       this.log(`Oops an error has occurred, for more details see: ${logFile}`)
     })
+    cli.action.stop()
   }
 
   private registerGeneratorsTask(): Listr.ListrTask {

@@ -75,12 +75,12 @@ export class FileService {
 
   // noinspection JSMethodCanBeStatic
   private formatOutputValue(value?: any): any | undefined {
-    if (!value) {
-      return 'NULL'
-    }
-
     if(typeof value === 'number') {
       return value
+    }
+
+    if (!value) {
+      return 'NULL'
     }
 
     return `'${value}'`
