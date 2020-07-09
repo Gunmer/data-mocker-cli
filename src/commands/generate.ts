@@ -105,13 +105,13 @@ export default class Generate extends Command {
       task: async (ctx: any, task: ListrTaskWrapper) => {
         switch (ctx.flags.output) {
           case 'json':
-            ctx.outputFile = this.fileService.writeJson(ctx.rows)
+            ctx.outputFile = this.fileService.writeJson(ctx.rows, ctx.schema.nameFormatter)
             break
           case 'sql':
-            ctx.outputFile = this.fileService.writeSql(ctx.rows, ctx.schema.tableName)
+            ctx.outputFile = this.fileService.writeSql(ctx.rows, ctx.schema.tableName, ctx.schema.nameFormatter)
             break
           case 'csv':
-            ctx.outputFile = this.fileService.writeCsv(ctx.rows)
+            ctx.outputFile = this.fileService.writeCsv(ctx.rows, ctx.schema.nameFormatter)
             break
         }
 

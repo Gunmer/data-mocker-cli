@@ -1,9 +1,9 @@
 export enum NameFormatter {
-  UpperCamelCase,
-  LowerCamelCase,
-  UpperSnakeCase,
-  LowerSnakeCase,
-  UpperKebabCase,
-  LowerKebabCase,
-  WithoutFormat,
+  UpperCamelCase = 'UpperCamelCase',
+  LowerCamelCase = 'LowerCamelCase',
+  UpperSnakeCase = 'UpperSnakeCase',
+  LowerSnakeCase = 'LowerSnakeCase',
+  UpperKebabCase = 'UpperKebabCase',
+  LowerKebabCase = 'LowerKebabCase',
+  WithoutFormat = 'WithoutFormat',
 }

@@ -1,5 +1,6 @@
 {
   "tableName": "people",
+  "nameFormatter": "LowerSnakeCase",
   "fields": [
     {
       "type": "Number",

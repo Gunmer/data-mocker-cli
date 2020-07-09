@@ -3,6 +3,7 @@ import * as path from 'path';
 import { FileNotFoundException } from '../exceptions/file-not-found.exception';
 import { InvalidFileExtensionException } from '../exceptions/invalid-file-extension.exception';
 import { InvalidJsonFormatException } from '../exceptions/invalid-json-format.exception';
+import { NameFormatter } from '../models/name-formatter';
 import { RowModel } from '../models/row.model';
 import { SchemaModel } from '../models/schema.model';
 import { StringService } from './string.service';
@@ -30,19 +31,19 @@ export class FileService {
     }
   }
 
-  writeJson(rows: RowModel[]): string {
-    const jsonArray = this.parseObject(rows)
+  writeJson(rows: RowModel[], nameFormatter?: NameFormatter): string {
+    const jsonArray = this.parseObject(rows, nameFormatter)
     const resultPath = path.join(process.cwd(), 'result.json');
 
     fs.writeFileSync(resultPath, JSON.stringify(jsonArray, null, 2), {encoding: 'utf-8'})
     return resultPath
   }
 
-  private parseObject(rows: RowModel[]): any[] {
+  private parseObject(rows: RowModel[], nameFormatter?: NameFormatter): any[] {
     return rows.map(row => {
       const object: any = {}
       for (const column of row.columns) {
-        const key = this.stringService.formatCamelCase(column.key);
+        const key = this.stringService.formatString(column.key, nameFormatter);
         object[key] = column.value
       }
       return object
@@ -55,10 +56,10 @@ export class FileService {
     return errorLogPath
   }
 
-  writeSql(rows: RowModel[], tableName = 'table_name'): string {
+  writeSql(rows: RowModel[], tableName = 'table_name', nameFormatter?: NameFormatter): string {
     const sqlComponents: SqlComponents[] = rows.map(r =>  {
       return  {
-        columns: r.columns.map(c => this.stringService.formatCamelCase(c.key)),
+        columns: r.columns.map(c => this.stringService.formatString(c.key, nameFormatter)),
         values: r.columns.map(c => this.formatOutputValue(c.value))
       }
     })
@@ -86,9 +87,9 @@ export class FileService {
     return `'${value}'`
   }
 
-  writeCsv(rows: RowModel[]): string {
-    const headers = rows[0].columns.map(r => this.stringService.formatCamelCase(r.key))
-    const values = this.parseObject(rows)
+  writeCsv(rows: RowModel[], nameFormatter?: NameFormatter): string {
+    const headers = rows[0].columns.map(r => this.stringService.formatString(r.key, nameFormatter))
+    const values = this.parseObject(rows, nameFormatter)
 
     const lines = values.map(obj => {
       const values = headers.map(h => {
