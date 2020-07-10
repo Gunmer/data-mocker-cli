@@ -1,4 +1,5 @@
 import { expect } from '@oclif/test';
+import { NameFormatter } from '../../../src/core/models/name-formatter';
 import { StringService } from '../../../src/core/services/string.service';
 
 describe('StringService', () => {
@@ -32,6 +33,20 @@ describe('StringService', () => {
   it('formatUpperSnakeCase should return a string with upper snake case', () => {
     const result = service.formatUpperSnakeCase('lorem ipsum');
     expect(result).equal('Lorem_Ipsum')
+  })
+
+  it('formatString should format text by NameFormatter ', () => {
+    expect(service.formatString('lorem ipsum', NameFormatter.LowerCamelCase)).to.equal('loremIpsum')
+    expect(service.formatString('lorem ipsum', NameFormatter.UpperCamelCase)).to.equal('LoremIpsum')
+    expect(service.formatString('lorem ipsum', NameFormatter.LowerKebabCase)).to.equal('lorem-ipsum')
+    expect(service.formatString('lorem ipsum', NameFormatter.UpperKebabCase)).to.equal('Lorem-Ipsum')
+    expect(service.formatString('lorem ipsum', NameFormatter.LowerSnakeCase)).to.equal('lorem_ipsum')
+    expect(service.formatString('lorem ipsum', NameFormatter.UpperSnakeCase)).to.equal('Lorem_Ipsum')
+    expect(service.formatString('lorem ipsum', NameFormatter.WithoutFormat)).to.equal('lorem ipsum')
+  })
+
+  it('formatString should format text by default ', () => {
+    expect(service.formatString('lorem ipsum')).to.equal('loremIpsum')
   })
 
 })
