@@ -11,8 +11,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: git config --global user.email $GITHUB_ACTOR"@github.com"
-    - run: git config --global user.name $GITHUB_ACTOR
+      with:
+        fetch-depth: 0
+
+    - name: config git
+      run: |
+      git config --global user.email $GITHUB_ACTOR"@github.com"
+      git config --global user.name $GITHUB_ACTOR
 
     - uses: actions/setup-node@v1
       with:
@@ -27,3 +32,14 @@ jobs:
 
     - run: git push
     - run: git push --tags
+
+    - name: merge master
+      run: |
+        VERSION=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+        git checkout master
+        git merge --no-ff $GITHUB_REF -m $VERSION
+        git push
+
+    - name: merge develop
+      run: |
+

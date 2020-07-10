@@ -8,7 +8,7 @@ export class RowGenerator {
   private readonly stringService = new StringService()
 
   register(fieldGenerator: FieldGenerator<any, any>): RowGenerator {
-    const key = this.stringService.formatCamelCase(fieldGenerator.type);
+    const key = this.stringService.formatLowerCamelCase(fieldGenerator.type);
     this.fieldGenerators.set(key, fieldGenerator)
     return this
   }
@@ -21,7 +21,7 @@ export class RowGenerator {
     const row: RowModel = {columns: []}
 
     for (const field of schema.fields) {
-      const key = this.stringService.formatCamelCase(field.type);
+      const key = this.stringService.formatLowerCamelCase(field.type);
       const fieldGenerator = this.fieldGenerators.get(key);
       if (fieldGenerator) {
         const column = fieldGenerator.generate(field);

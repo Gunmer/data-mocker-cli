@@ -84,6 +84,7 @@ If you want to export in sql format, you can report the name of the table within
 ```json
 {
   "tableName": "people",
+  "nameFormatter": "LowerSnakeCase",
   "fields": [
     {
       "type": "Number",
@@ -127,6 +128,19 @@ If you want to export in sql format, you can report the name of the table within
   ]
 }
 ```
+
+### NameFormatters
+With this property you set the style of the name of the columns or attributes. If not reported by default it is LowerCamelCase
+
+| NameFormatters | Formats                                |
+|----------------|----------------------------------------|
+| UpperCamelCase | 'lorem ipsum' formats as 'LoremIpsum'  |
+| LowerCamelCase | 'lorem ipsum' formats as 'loremIpsum'  |
+| UpperSnakeCase | 'lorem ipsum' formats as 'Lorem_Ipsum' |
+| LowerSnakeCase | 'lorem ipsum' formats as 'lorem_ipsum' |
+| UpperKebabCase | 'lorem ipsum' formats as 'Lorem-Ipsum' |
+| LowerKebabCase | 'lorem ipsum' formats as 'lorem-ipsum' |
+| WithoutFormat  | 'lorem ipsum' formats as 'lorem ipsum' |
 
 ## Common attributes
 
