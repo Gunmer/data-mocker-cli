@@ -13,6 +13,7 @@
     "cli-ux": "^5.4.9",
     "listr": "^0.14.3",
     "lodash": "^4.17.19",
+    "moment": "^2.27.0",
     "tslib": "^1.13.0"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^10.17.24",
     "@types/lodash": "^4.14.157",
+    "@types/moment": "^2.13.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-oclif": "^3.1.0",
