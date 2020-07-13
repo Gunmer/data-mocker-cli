@@ -19,11 +19,21 @@ jobs:
       git config --global user.email $GITHUB_ACTOR"@github.com"
       git config --global user.name $GITHUB_ACTOR
 
+    - name: Cache node modules
+      uses: actions/cache@v2
+      id: cache-node-modules
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
     - uses: actions/setup-node@v1
       with:
         node-version: 12.x
         registry-url: 'https://registry.npmjs.org'
+
     - run: npm install
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+
     - run: npm test
     - run: npm version $(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
     - run: npm publish
