@@ -27,7 +27,7 @@ $ npm install -g data-mocker-cli
 $ dmcli COMMAND
 running command...
 $ dmcli (-v|--version|version)
-data-mocker-cli/1.0.1 linux-x64 node-v12.18.1
+data-mocker-cli/1.1.0 linux-x64 node-v12.18.1
 $ dmcli --help [COMMAND]
 USAGE
   $ dmcli COMMAND
@@ -56,7 +56,7 @@ OPTIONS
   -s, --schema=schema        (required) Schema of the data to be generated
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v1.0.1/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v1.1.0/src/commands/generate.ts)_
 
 ## `dmcli help [COMMAND]`
 
@@ -84,6 +84,7 @@ If you want to export in sql format, you can report the name of the table within
 ```json
 {
   "tableName": "people",
+  "nameFormatter": "LowerSnakeCase",
   "fields": [
     {
       "type": "Number",
@@ -127,6 +128,19 @@ If you want to export in sql format, you can report the name of the table within
   ]
 }
 ```
+
+### NameFormatters
+With this property you set the style of the name of the columns or attributes. If not reported by default it is LowerCamelCase
+
+| NameFormatters | Formats                                |
+|----------------|----------------------------------------|
+| UpperCamelCase | 'lorem ipsum' formats as 'LoremIpsum'  |
+| LowerCamelCase | 'lorem ipsum' formats as 'loremIpsum'  |
+| UpperSnakeCase | 'lorem ipsum' formats as 'Lorem_Ipsum' |
+| LowerSnakeCase | 'lorem ipsum' formats as 'lorem_ipsum' |
+| UpperKebabCase | 'lorem ipsum' formats as 'Lorem-Ipsum' |
+| LowerKebabCase | 'lorem ipsum' formats as 'lorem-ipsum' |
+| WithoutFormat  | 'lorem ipsum' formats as 'lorem ipsum' |
 
 ## Common attributes
 
