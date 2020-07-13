@@ -27,7 +27,7 @@ $ npm install -g data-mocker-cli
 $ dmcli COMMAND
 running command...
 $ dmcli (-v|--version|version)
-data-mocker-cli/1.0.1 linux-x64 node-v12.18.1
+data-mocker-cli/1.1.0 linux-x64 node-v12.18.1
 $ dmcli --help [COMMAND]
 USAGE
   $ dmcli COMMAND
@@ -56,7 +56,7 @@ OPTIONS
   -s, --schema=schema        (required) Schema of the data to be generated
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v1.0.1/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/Gunmer/data-mocker-cli/blob/v1.1.0/src/commands/generate.ts)_
 
 ## `dmcli help [COMMAND]`
 
